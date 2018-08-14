@@ -41,7 +41,7 @@ const foodSchema = new mongoose.Schema({
 	title: {type: String},
 })
 const Food = mongoose.model('meal', foodSchema)
-//create data for test database mlab
+//create data for test database mlab. it will create the same item every time you save.
 const veggieBurger= new Food({title: "BocaBurger"})
 veggieBurger.save((err)=> console.log("our err"+err))
 
@@ -59,7 +59,8 @@ app.post('/save', (req, res) => {
 	const newFood = new Food(req.body)
 	newFood.save((err, data) => {
 		if(err) console.log(err)
-		res.redirect("http://localhost:3000")
+        //res.redirect("http://localhost:3000")
+        res.send(data)
 	})
 })
 
