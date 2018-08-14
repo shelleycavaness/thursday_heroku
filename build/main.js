@@ -100,6 +100,7 @@ const app = __WEBPACK_IMPORTED_MODULE_1_express___default()();
 /*heroku config:set MLAB_URL=mongodb://she:1964knicker@ds121182.mlab.com:21182/hugo-lab  
 this is to set up the config setting in heroku. some are set and some you can create.
 the .env file is writen in shell. better not to leave spaces
+git push -u heroku master (this is so that heroku find the remote)
 */
 const DBUrl = process.env.MLAB_URL || process.env.LOCAL_Url;
 const SERVER_PORT = process.env.PORT || process.env.LOCAL_PORT;
@@ -130,6 +131,9 @@ const foodSchema = new __WEBPACK_IMPORTED_MODULE_2_mongoose___default.a.Schema({
 	title: { type: String }
 });
 const Food = __WEBPACK_IMPORTED_MODULE_2_mongoose___default.a.model('meal', foodSchema);
+//create data for test database mlab
+const veggieBurger = new Food({ title: "BocaBurger" });
+veggieBurger.save(err => console.log("our err" + err));
 
 //recuperer la base de donnees
 app.get('/data', (req, res) => {
