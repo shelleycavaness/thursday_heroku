@@ -95,7 +95,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 const app = __WEBPACK_IMPORTED_MODULE_1_express___default()();
-const { PORT, DBUrl } = process.env;
+//const {PORT, DBUrl} = process.env; (first version)
+//(these are the local varibles- give them name that make sence and use cap to follow convention)
+/*heroku config:set MLAB_URL=mongodb://she:1964knicker@ds121182.mlab.com:21182/hugo-lab  
+this is to set up the config setting in heroku. some are set and some you can create.
+the .env file is writen in shell. better not to leave spaces
+*/
+const DBUrl = process.env.MLAB_URL || process.env.LOCAL_Url;
+const SERVER_PORT = process.env.PORT || process.env.LOCAL_PORT;
 const options = { promiseLibrary: Promise, useNewUrlParser: true };
 const db = __WEBPACK_IMPORTED_MODULE_2_mongoose___default.a.connection;
 
@@ -107,8 +114,8 @@ app.use(__WEBPACK_IMPORTED_MODULE_4_cors___default()());
 app.use(__WEBPACK_IMPORTED_MODULE_1_express___default.a.urlencoded({ extended: false }));
 
 //express se connect a un port
-app.listen(PORT, () => {
-	console.log(`server listen ${PORT}`);
+app.listen(SERVER_PORT, () => {
+	console.log(`server listen ${SERVER_PORT}`);
 });
 
 //connection base de donnee
